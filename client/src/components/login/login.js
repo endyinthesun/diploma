@@ -26,13 +26,10 @@ export default class Login extends Component {
     }
 
     signIn() {
-        console.log(`--- login`, this.state.login);
-        console.log(`--- password`, this.state.password);
         this.sovService.signIn(this.state.login, this.state.password)
                 .then((result) => {
             let state = {};
             if (result !== undefined && result['error'] === '0') {
-                console.log(result)
                 this.props.history.push('/subscriber/' + result['data']['id']);
 
                 state['full_name'] = result['data']['full_name'];

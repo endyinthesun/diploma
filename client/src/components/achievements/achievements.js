@@ -10,10 +10,6 @@ export default class Achievements extends Component{
 	constructor(props) {
 		super(props);
 		this.state = {
-			selected_item_list_1: [],
-			selected_item_list_2: [],
-			selected_item_list_3: [],
-			selected_item_list_4: [],
 			subscriber_item_list_1: [],
 			subscriber_item_list_2: [],
 			subscriber_item_list_3: [],
@@ -24,55 +20,26 @@ export default class Achievements extends Component{
 	sovService = new sovService();
 
 
-	getSelectedItemList() {
-		let getListByCategory = (category) =>{
-			return this.props.item_list
-				.filter((item) => item.type_of_category === category)
-				.map(item => {
-					return {
-							value: item.id,
-							label: item.item_name
-						}
-				});
-		}
-
-
-		// let array_item_1 = getListByCategory('1'),
-		// 	array_item_2 = getListByCategory('2'),
-		// 	array_item_3 = getListByCategory('3'),
-		// 	array_item_4 = getListByCategory('4');
-
-		this.setState({
-			selected_item_list_1 : getListByCategory('1'),
-			selected_item_list_2: getListByCategory('2'),
-			selected_item_list_3: getListByCategory('3'),
-			selected_item_list_4: getListByCategory('4'),
-		});
-	}
-
 	getItemListBySubscriber ()  {
-
-		let getItemTableByCategory = (category, item_list) => {
-			return item_list
-				.filter((item) => item.type_of_category === category);
-		}
-
 		this.sovService.getItemListBySubscriber(this.props.paramsId)
 			.then((result) => {
-				if (result['error'] === '0') {
-					let array_item_1 = getItemTableByCategory('1', result['data']),
-						array_item_2 = getItemTableByCategory('2', result['data']),
-						array_item_3 = getItemTableByCategory('3', result['data']),
-						array_item_4 = getItemTableByCategory('4', result['data']);
+					let getItemTableByCategory = (category, item_list) => {
+						return item_list
+							.filter((item) => item.type_of_category === category);
+					}
+					let state = {};
+					if (result['error'] === '0') {
+						state['subscriber_item_list_1'] = getItemTableByCategory('1', result['data']);
+						state['subscriber_item_list_2'] = getItemTableByCategory('2', result['data']);
+						state['subscriber_item_list_3'] = getItemTableByCategory('3', result['data']);
+						state['subscriber_item_list_4'] = getItemTableByCategory('4', result['data']);
 
-					this.setState({subscriber_item_list_1: array_item_1});
-					this.setState({subscriber_item_list_2: array_item_2});
-					this.setState({subscriber_item_list_3: array_item_3});
-					this.setState({subscriber_item_list_4: array_item_4});
+						return state;
 				}
-			}
-			)
-
+			})
+			.then( (state) =>{
+			this.setState(state);
+		})
 
 	}
 
@@ -98,7 +65,6 @@ export default class Achievements extends Component{
 	// not working
 	dropItemsFromSubscriber = (item_id) => {
 		let data = new FormData();
-		// console.log(`--- selected_item_list`, this.state.selected_item_list);
 		this.props.item_list.map((item) => {
 			if (item.id === item_id) {
 				data.append('item', JSON.stringify(item));
@@ -117,22 +83,15 @@ export default class Achievements extends Component{
 
 
 	componentDidMount() {
-		this.getSelectedItemList();
 		this.getItemListBySubscriber();
-		this.props.countSubscriber(this.props.paramsId);
 	}
 
 	render() {
+		const {subscriber_item_list_1,subscriber_item_list_2,
+			subscriber_item_list_3,subscriber_item_list_4 } = this.state;
 		const {selected_item_list_1,selected_item_list_2,
-			selected_item_list_3, selected_item_list_4,
-			subscriber_item_list_1,subscriber_item_list_2,
-			subscriber_item_list_3,subscriber_item_list_4, } = this.state;
+			selected_item_list_3, selected_item_list_4 } = this.props;
 
-		//при оновлені губиться selected_item_list
-		console.log(`--- selected_item_list_1`,selected_item_list_1);
-		console.log(`--- selected_item_list_2`,selected_item_list_2);
-		console.log(`--- selected_item_list_3`,selected_item_list_3);
-		console.log(`--- selected_item_list_4`,selected_item_list_4);
 
 		return(
 			<div>

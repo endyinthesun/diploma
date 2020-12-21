@@ -113,7 +113,6 @@ export default class Rating extends Component {
 	render() {
 		const {		headsOfDepartment_rating_list, professors_rating_list, docents_rating_list,
 			seniorTeachers_rating_list, teachers_rating_list, assistants_rating_list} = this.state;
-		console.log(`--- headOfDepartment_rating_list`, headsOfDepartment_rating_list);
 		return(
 			<div>
 				<details>

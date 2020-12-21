@@ -21,6 +21,11 @@ export default class Subscriber extends Component {
 			type_of_page: '1',
 			userItems: '',
 			item_list: [],
+			selected_item_list_1: [],
+			selected_item_list_2: [],
+			selected_item_list_3: [],
+			selected_item_list_4: []
+
 		}
 	}
 
@@ -38,7 +43,7 @@ export default class Subscriber extends Component {
 						'value': user['data']['value'],
 						'faculty_id': user['data']['faculty_id'],
 						'cafedra_id': user['data']['cafedra_id'],
-						'userItems': user['data']['items']
+						'userItems': user['data']['items'],
 					});
 				}
 			});
@@ -68,10 +73,38 @@ export default class Subscriber extends Component {
 				}
 			});
 	}
+	getSelectedItemList() {
+		this.sovService.getItemList()
+			.then((result) => {
+				let getListByCategory = (category) =>{
+					return result['data']
+						.filter((item) => item.type_of_category === category)
+						.map(item => {
+							return {
+								value: item.id,
+								label: item.item_name
+							}
+						});
+				}
+					if (result !== undefined && result['error'] === '0') {
+						this.setState({
+							selected_item_list_1 : getListByCategory('1'),
+							selected_item_list_2: getListByCategory('2'),
+							selected_item_list_3: getListByCategory('3'),
+							selected_item_list_4: getListByCategory('4'),
+						});
+					}
+				}
+			) ;
 
+
+
+	}
 	componentDidMount() {
 		this.getUser();
 		this.getItemList();
+		this.getSelectedItemList();
+		this.countSubscriber(this.props.match.params.id)
 	}
 
 	getAchievementList() {
@@ -82,7 +115,8 @@ export default class Subscriber extends Component {
 	}
 
 	render() {
-		const {paramsId, id, item_list, full_name, faculty_id, cafedra_id} = this.state;
+		const {paramsId, id, item_list, full_name, faculty_id, cafedra_id,
+			selected_item_list_1,selected_item_list_2,selected_item_list_3,selected_item_list_4 } = this.state;
 		return([
 			<div key={'pages'}>
 				<div key={'achievements'} onClick={() => this.getAchievementList()}><p>Досягнення</p></div>
@@ -94,6 +128,10 @@ export default class Subscriber extends Component {
 					paramsId = {paramsId}
 					countSubscriber={this.countSubscriber}
 					item_list = {item_list}
+					selected_item_list_1 = {selected_item_list_1}
+					selected_item_list_2 = {selected_item_list_2}
+					selected_item_list_3 = {selected_item_list_3}
+					selected_item_list_4 = {selected_item_list_4}
 				/> : '',
 
 			this.state.type_of_page === '2' && this.state.type_of_page !== null ?
