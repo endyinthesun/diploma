@@ -1,0 +1,5 @@
+#Ignorelist of project files
+
+node_modules/
+.idea/
+npm-debug.log*
