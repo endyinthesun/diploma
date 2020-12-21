@@ -4,10 +4,10 @@ import React, {Component} from "react"
 import * as Request from '../../Helpers/Request';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import Subscriber from "../subscriber/subscriber";
-import Registration from "../Registration/Registration";
+import Login from "../login/login";
 import AddItem from "../Items/AddItem";
 
-class App extends Component {
+export default class App extends Component {
 
     constructor(props) {
         super(props)
@@ -22,7 +22,7 @@ class App extends Component {
                 <Router>
                     <Switch>
                         <Route path="/subscriber/:id" component={Subscriber}/>
-                        <Route path="/registration/" component={Registration}/>
+                        <Route path="/login/" component={Login}/>
                         <Route path="/item/" component={AddItem}/>
                     </Switch>
                 </Router>
@@ -31,5 +31,3 @@ class App extends Component {
         )
     }
 }
-
-export default App;

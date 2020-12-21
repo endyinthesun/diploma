@@ -1,7 +1,8 @@
 import React, {Component} from 'react'
-import * as Request from "../../Helpers/Request";
+// import * as Request from "../../Helpers/Request";
+import sovService from "../../services/sovService";
 
-class Registration extends Component {
+export default class Login extends Component {
 
     constructor(props) {
         super(props)
@@ -9,10 +10,9 @@ class Registration extends Component {
             'login':'',
             'password': ''
         }
-        this.handleSubmit = this.handleSubmit.bind(this);
     }
-
-    handleChange(data) {
+    sovService = new sovService();
+    handleChange = (data)=> {
         const {name, value} = data.target
         this.setState({
                 [name]: value
@@ -20,16 +20,16 @@ class Registration extends Component {
         )
     }
 
-    handleSubmit(event) {
-        // alert('Ім\'я, що було надіслано: ' + this.state.login);
+    handleSubmit = (e) => {
+        e.preventDefault();
         this.signIn()
-
-        event.preventDefault();
     }
 
     signIn() {
-
-        Request.sendGetQuery(`http://diploma/api/Teachers.php?controller=sign&login=${this.state.login}&password=${this.state.password}`).then((result) => {
+        console.log(`--- login`, this.state.login);
+        console.log(`--- password`, this.state.password);
+        this.sovService.signIn(this.state.login, this.state.password)
+                .then((result) => {
             let state = {};
             if (result !== undefined && result['error'] === '0') {
                 console.log(result)
@@ -43,19 +43,18 @@ class Registration extends Component {
                 state['faculty_id'] = result['data']['faculty_id'];
             }
             this.setState(state);
+
         });
     }
 
     render() {
         return (
             <form onSubmit={this.handleSubmit}>
-                <input name='login' placeholder="First Name" onChange={data => this.handleChange(data)}/><br/>
-                <input name='password' placeholder="Last Name" onChange={data => this.handleChange(data)}/><br/>
+                <input name='login' placeholder="Логін" onChange={data => this.handleChange(data)}/><br/>
+                <input name='password' placeholder="Пароль" onChange={data => this.handleChange(data)}/><br/>
                 <input type="submit" value="Надіслати" />
             </form>
         )
     }
 
 }
-
-export default Registration;

@@ -25,11 +25,13 @@ export default class sovService {
 
 
 	//GET methods
+	signIn(login, password){
+		return this.getResource(`/Teachers.php?controller=sign&login=${login}&password=${password}`);
+	}
 
 	getRatingBy(id) {
 		return this.getResource(`/Items.php?controller=getRatingBy&rank_id=${id}`);
 	}
-
 
 	countSubscriber(id) {
 		return this.getResource(`/Teachers.php?controller=countTeacherItem&id=${id}`);
