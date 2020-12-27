@@ -1,9 +1,14 @@
 // import {useParams} from "react-router";
 import React, {Component} from 'react';
 import * as Request from "../../Helpers/Request";
+
 import Achievements from "../achievements/achievements";
 import Rating from "../rating/rating";
+import SignUp from "../signup/signup";
+
 import sovService from "../../services/sovService";
+import Header from "../header/header"
+import { ReactComponent as Logo } from '../../logo.svg'
 
 export default class Subscriber extends Component {
 
@@ -25,7 +30,6 @@ export default class Subscriber extends Component {
 			selected_item_list_2: [],
 			selected_item_list_3: [],
 			selected_item_list_4: []
-
 		}
 	}
 
@@ -107,22 +111,37 @@ export default class Subscriber extends Component {
 		this.countSubscriber(this.props.match.params.id)
 	}
 
-	getAchievementList() {
+	getAchievementList = () => {
 		this.setState({type_of_page: '1'});
 	}
-	getRating() {
+	getRating = () => {
 		this.setState({type_of_page: '2'});
 	}
 
+	getSignUp = () => {
+		this.setState({type_of_page: '3'});
+	}
+
 	render() {
-		const {paramsId, id, item_list, full_name, faculty_id, cafedra_id,
+		const {paramsId, id, item_list, full_name, faculty_id, cafedra_id, premision,
 			selected_item_list_1,selected_item_list_2,selected_item_list_3,selected_item_list_4 } = this.state;
 		return([
-			<div key={'pages'}>
-				<div key={'achievements'} onClick={() => this.getAchievementList()}><p>Досягнення</p></div>
-				<div key={'institute'} onClick={() => this.getRating()}><p>Рейтинг</p></div>
-			</div>,
-			this.state.type_of_page === '1' && this.state.type_of_page !== null ?
+			// <div key={'pages'}>
+			// 	<div key={'achievements'} onClick={() => this.getAchievementList()}><p>Досягнення</p></div>
+			// 	<div key={'rating'} onClick={() => this.getRating()}><p>Рейтинг</p></div>
+			// </div>,
+			<Header
+				userName= {full_name}
+				className='Home-Header'
+				renderIcon={() => (
+					<Logo className='Header-Icon'/>
+				)}
+				rating = {this.getRating}
+				achievements = {this.getAchievementList}
+				premision = {premision}
+				signup = {this.getSignUp}
+			/>,
+			this.state.type_of_page === '1' && (premision === '1' || premision === '2') && this.state.type_of_page !== null ?
 				<Achievements
 					user_id={id}
 					paramsId = {paramsId}
@@ -143,59 +162,17 @@ export default class Subscriber extends Component {
 					countSubscriber={this.countSubscriber}
 				/> : '',
 
+
+			this.state.type_of_page === '3' && premision === '1' && this.state.type_of_page !== null ?
+				<SignUp
+					faculty_id = {faculty_id}
+					cafedra_id  = {cafedra_id}
+				/> : ''
+
 		]);
 
 
 	}
 
-	/*	render() {
-			return ([
-					<div key={'pages'}>
-						<div key={'achievements'} onClick={() => this.getAchievementList()}><p>Досягнення</p></div>
-						<div key={'institute'} onClick={() => this.getRatingUniversityList()}><p>Рейтинг Інституту</p></div>
-						<div key={'cafedra'} onClick={() => this.getRatingCafedraList()}><p>Рейтинг Кафедри</p></div>
-						<div key={'faculty'} onClick={() => this.getRatingFacultyList()}><p>Рейтинг Факультету</p>
-						</div>
-					</div>,
-					this.state.type_of_page == '1' && this.state.type_of_page !== null ?
-						[	<achievements
-								user_id={this.state.id}
-								countSubscriber={this.countSubscriber}
-								paramsId = {this.state.paramsId}
-							/>
-						] : '',
-
-						this.state.type_of_page == '2' && this.state.type_of_page !== null ?
-							[
-								<table key={'table'}>
-									<tr>
-										<th key={'subscriber_name'}>Науково-педагогічний працівник</th>
-										<th key={'subscriber_mark'}>Оцінка</th>
-									</tr>
-								{this.state.rating_list.map((subscriber) =>
-									<tr>
-										<td value={subscriber.id}
-											key={'subscriber_name_' + subscriber.id}>{subscriber.full_name}</td>
-										<td value={subscriber.id}
-											key={'subscriber_coefficient_' + subscriber.id}>{subscriber.value}</td>
-									</tr>
-								)}
-							</table>
-								] : ''
-				]
-			)
-		}*/
-
 }
 
-/*	<ul>
-				<li>paramsId: {paramsId}</li>
-				<li>id: {id}</li>
-				<li>full_name: {full_name}</li>
-				<li>premision: {premision}</li>
-				<li>value: {value}</li>
-				<li>faculty_id: {faculty_id}</li>
-				<li>cafedra_id: {cafedra_id}</li>
-				<li>rating_list: {rating_list}</li>
-				<li>items: {items}</li>
-			</ul>*/

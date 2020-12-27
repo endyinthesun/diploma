@@ -1,6 +1,7 @@
 import React, { Component} from 'react';
 import sovService from "../../services/sovService";
 import RatingTable from "../../components/rating-table/rating-table"
+import './Rating.scss'
 
 export default class Rating extends Component {
 	constructor(props) {
@@ -114,49 +115,52 @@ export default class Rating extends Component {
 		const {		headsOfDepartment_rating_list, professors_rating_list, docents_rating_list,
 			seniorTeachers_rating_list, teachers_rating_list, assistants_rating_list} = this.state;
 		return(
-			<div>
+			<div className="wrapper">
+				<div className="wrapper-l">
+
 				<details>
-					<summary>Завідуючі кафедри</summary>
+					<summary><h5 className="lol">Завідуючі кафедри</h5></summary>
 					<RatingTable
 						rating_list = {headsOfDepartment_rating_list}
 					/>
 				</details>
 
 				<details>
-					<summary>Професори</summary>
+					<summary><h5 className="lol">Професори</h5></summary>
 					<RatingTable
 						rating_list = {professors_rating_list}
 					/>
 				</details>
 
 				<details>
-					<summary>Доценти</summary>
+					<summary><h5 className="lol">Доценти</h5></summary>
 					<RatingTable
 						rating_list = {docents_rating_list}
 					/>
 				</details>
 
 				<details>
-					<summary>Старші викладачі</summary>
+					<summary><h5 className="lol">Старші викладачі</h5></summary>
 					<RatingTable
 						rating_list = {seniorTeachers_rating_list}
 					/>
 				</details>
 
 				<details>
-					<summary>Викладачі</summary>
+					<summary><h5 className="lol">Викладачі</h5></summary>
 					<RatingTable
 						rating_list = {teachers_rating_list}
 					/>
 				</details>
 
 				<details>
-					<summary>Асистенти</summary>
+					<summary><h5 className="lol">Асистенти</h5></summary>
 					<RatingTable
 						rating_list = {assistants_rating_list}
 					/>
 				</details>
 
+			</div>
 			</div>
 		);
 	}

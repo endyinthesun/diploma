@@ -1,0 +1,43 @@
+.Header {
+  color: white;
+  background-color: #2A6785;
+  height: 80px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%; }
+
+.Header-Body {
+  width: 100%;
+  max-width: 800px;
+  min-width: 500px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between; }
+
+.Header-Icon {
+  width: 45px;
+  height: 45px;
+  margin-right: 20px; }
+
+.Header-Title {
+  font-size: 13px;
+  height: 45px;
+  width: 100px;
+  line-height: 1.2; }
+
+.Header-UserName {
+  font-size: 14px;
+  margin-right: 20px; }
+
+.Header-ExitBtn {
+  border: 1px solid white;
+  background-color: #3990D5; }
+
+.Header-Link {
+  cursor: pointer;
+  padding: 5px;
+  margin: 10px; }
+
+/*# sourceMappingURL=header.css.map */

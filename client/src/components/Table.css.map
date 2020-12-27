@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA,eAAgB;EACd,WAAW,EAAE,IAAI;EACjB,cAAc,EAAE,IAAI;;AAKlB,eAAG;EACD,MAAM,EAAE,IAAI;AAIZ,gCAAmB;EACjB,gBAAgB,EAAE,KAAK;AAGzB,iCAAoB;EAClB,gBAAgB,EAAE,OAAO;;AAMjC,aAAc;EACZ,gBAAgB,EAAE,OAAO;EACzB,KAAK,EAAE,KAAK;EAEZ,gBAAG;IACD,MAAM,EAAE,IAAI",
+"sources": ["Table.scss"],
+"names": [],
+"file": "Table.css"
+}

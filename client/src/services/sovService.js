@@ -12,17 +12,10 @@ export default class sovService {
 	async postData(url, data){
 		let res = await fetch(`${this._apiBase}${url}`, {
 			method: 'POST',
-			mode: "no-cors",
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify(data)
-			// body: data
+			body: data
 		});
-		console.log(`--- data from PostData`, data);
 		return await res.json();
 	}
-
 
 	//GET methods
 	signIn(login, password){
@@ -49,9 +42,7 @@ export default class sovService {
 		return this.getResource(`/Teachers.php?controller=getItemsBySubscriber&id=${id}`);
 	}
 
-
-
-		//POST methods
+	//POST methods
 
 	dropItemsFromSubscriber(data){
 		return this.postData('/Teachers.php?controller=dropItemsFromSubscriber', data);
@@ -61,8 +52,9 @@ export default class sovService {
 		return this.postData('/Items.php?controller=addItemsToSubscriber', data);
 	}
 
-
-
+	signUp(data){
+		return this.postData('/Teachers.php?controller=signUp', data);
+	}
 
 
 }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Час створення: Гру 21 2020 р., 12:57
+-- Час створення: Гру 22 2020 р., 09:11
 -- Версія сервера: 5.6.47
 -- Версія PHP: 7.1.33
 
@@ -37,7 +37,11 @@ CREATE TABLE `cafedra` (
 --
 
 INSERT INTO `cafedra` (`id`, `cafedra_name`) VALUES
-(1, 'Кафедра захисту інформації');
+(1, 'Комп\'ютерна інженерія та кібербезпека'),
+(2, 'Професійна освіта та комп\'ютерні технології'),
+(3, 'Інженерія програмного забезпечення'),
+(4, 'Комп’ютерні наук'),
+(5, 'Фундаментальні наук');
 
 -- --------------------------------------------------------
 
@@ -55,7 +59,7 @@ CREATE TABLE `faculty` (
 --
 
 INSERT INTO `faculty` (`id`, `faculty_name`) VALUES
-(1, 'Копьютерні науки');
+(1, 'ФКНІТ');
 
 -- --------------------------------------------------------
 
@@ -76,8 +80,6 @@ CREATE TABLE `items` (
 --
 
 INSERT INTO `items` (`id`, `item_name`, `item_value`, `coefficient`, `type_of_category`) VALUES
-(4, 'прибирання', 10, 2, 1),
-(5, 'прибирання', 10, 3, 1),
 (6, 'Стаття в зарубіжному виданні', 50, 1, 2),
 (7, 'Стаття у вітчизняних наукових фахових виданнях категорії А', 100, 1, 1),
 (8, 'Стаття у вітчизняних наукових фахових виданнях категорії Б', 40, 1, 1),
@@ -117,8 +119,9 @@ CREATE TABLE `subscriber` (
 --
 
 INSERT INTO `subscriber` (`id`, `login`, `password`, `full_name`, `items`, `value`, `premision`, `cafedra_id`, `faculty_id`, `rank`) VALUES
-(1, 'panas', 'panas', 'Гнатюк Денис Янович', '{\"items\":{\"6\":{\"id\":\"6\",\"item_name\":\"Стаття в зарубіжному виданні\",\"item_value\":\"50\",\"coefficient\":\"1\",\"type_of_category\":\"2\",\"item_result\":50}},\"item\":null}', 20, 1, 1, 1, 1),
-(2, 'vlad', 'vlad', 'Каленіков Владислав Сергійович', '{\"items\":{\"4\":{\"id\":\"4\",\"item_name\":\"прибирання\",\"item_value\":\"10\",\"coefficient\":\"2\",\"type_of_category\":\"1\",\"item_result\":20},\"6\":{\"id\":\"6\",\"item_name\":\"Стаття в зарубіжному виданні\",\"item_value\":\"50\",\"coefficient\":\"1\",\"type_of_category\":\"2\",\"item_result\":50},\"5\":{\"id\":\"5\",\"item_name\":\"прибирання\",\"item_value\":\"10\",\"coefficient\":\"3\",\"type_of_category\":\"1\",\"item_result\":30}},\"item\":null}', 0, 1, 1, 1, 1);
+(1, 'panas', 'panas', 'Гнатюк Денис Янович', '{\"items\":{\"7\":{\"id\":\"7\",\"item_name\":\"Стаття у вітчизняних наукових фахових виданнях категорії А\",\"item_value\":\"100\",\"coefficient\":\"1\",\"type_of_category\":\"1\",\"item_result\":100},\"9\":{\"id\":\"9\",\"item_name\":\"Стаття у вітчизняних наукових фахових виданнях категорії В\",\"item_value\":\"20\",\"coefficient\":\"1\",\"type_of_category\":\"1\",\"item_result\":20}},\"item\":null}', 48, 1, 1, 1, 1),
+(2, 'vlad', 'vlad', 'Каленіков Владислав Сергійович', '{\"items\":{\"8\":{\"id\":\"8\",\"item_name\":\"Стаття у вітчизняних наукових фахових виданнях категорії Б\",\"item_value\":\"40\",\"coefficient\":\"1\",\"type_of_category\":\"1\",\"item_result\":40}},\"item\":null}', 16, 1, 1, 1, 1),
+(3, 'login', 'pass', 'login pass', '{\"items\":{},\"item\":null}', 0, 2, 1, 1, 0);
 
 --
 -- Індекси збережених таблиць
@@ -158,7 +161,7 @@ ALTER TABLE `subscriber`
 -- AUTO_INCREMENT для таблиці `cafedra`
 --
 ALTER TABLE `cafedra`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT для таблиці `items`
@@ -170,7 +173,7 @@ ALTER TABLE `items`
 -- AUTO_INCREMENT для таблиці `subscriber`
 --
 ALTER TABLE `subscriber`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Обмеження зовнішнього ключа збережених таблиць

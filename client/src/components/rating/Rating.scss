@@ -1,0 +1,95 @@
+.wrapper{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  .wrapper-l {
+    padding: 20px;
+    width: 65%;
+  }
+}
+
+summary {
+  &::-webkit-details-marker { display: none; }
+  &::-moz-list-bullet { list-style-type: none; }
+  // display: block; - не всегда уместно
+  font-size: 18px;
+}
+$img-marker: 'data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjM0IiB2aWV3Qm94PSIwIDAgMjQgMjQiIHdpZHRoPSIzNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNOC41OSAxNi4zNGw0LjU4LTQuNTktNC41OC00LjU5TDEwIDUuNzVsNiA2LTYgNnoiLz48L3N2Zz4=';
+
+details {
+
+  // Косметические улучшения
+  position: relative;
+  margin-bottom: .5rem;
+  min-height: 1rem;
+  max-height: 3rem;
+  transition: min-height .15s linear, max-height .5s linear;
+  -webkit-transition: min-height .15s linear, max-height .15s linear;
+  overflow: hidden;
+
+  // Заголовок
+  summary {
+
+    // Удаление стандартного маркера
+    &::-webkit-details-marker { display: none; }
+    &::-moz-list-bullet { list-style-type: none; }
+
+    // Ограничение кликабельной области заголовка
+    display: inline-block;
+
+    // Пространство для маркера
+    padding-left: 1.5em;
+
+    // Косметические улучшения
+    cursor: pointer;
+    outline: 0;
+    transition: color .12s;
+    -webkit-transition: color .12s;
+    span { border-bottom: 1px currentColor dotted; font-size: 18px; }
+    &:hover { color: #6c94d0; }
+
+    // Добавление маркера
+    &::before {
+      content: "";
+      left: 0;
+      top: .4em;
+      position: absolute;
+      background: url($img-marker) no-repeat 50% 50% / 1em 1em;
+      width: 1em;
+      height: 1em;
+      transition: transform .1s linear;
+      -webkit-transition: transform .1s linear;
+    }
+
+    // Контент, стоящий после заголовка
+    & ~ * {
+      padding-left: 1.5em;
+      opacity: 0;
+      transition: opacity .15s linear;
+      -webkit-transition: opacity .15s linear;
+    }
+
+  }
+
+  // Открытый спойлер
+  &[open] {
+    min-height: 2em;
+    max-height: 20em;
+    summary {
+      color: #424242;
+
+      & ~ * {
+        opacity: 1;
+      }
+      &:before {
+        transform: rotate(90deg);
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+      }
+
+    }
+
+  }
+
+}

@@ -39,6 +39,19 @@ class Teachers
             $this->dropItemsFromSubscriber();
         }
 
+        if ($_GET['controller'] == 'signUp') {
+            $this->registration();
+        }
+
+    }
+
+    public function registration()
+    {
+        $insert_data = "INSERT INTO subscriber (login,password,full_name,premision, cafedra_id, faculty_id, rank) VALUES('" . $_POST['login'] . "','" . $_POST['password'] . "','" . $_POST['full_name'] . "','" . $_POST['permission'] . "','" . $_POST['cafedra_id'] . "','" . $_POST['faculty_id'] . "','". $_POST['rank']."')";
+        $result = mysqli_query($this->database->link, $insert_data);
+
+        $data = ['error' => '0', 'data' => $result];
+        echo json_encode($data,JSON_UNESCAPED_UNICODE);
     }
 
     public function login()
@@ -118,9 +131,8 @@ class Teachers
 
         foreach ($value->items as $key=>$data_item) {
             if ($data_item->id === $item->id) {
-                $drop_value = $data_item->id;
+                unset($value->items->{$data_item->id});
             }
-            unset($value->items->{$data_item->id});
         }
 
         $insert_data = "UPDATE subscriber SET items = '" . json_encode($value,JSON_UNESCAPED_UNICODE) . "' WHERE id = '" . $_POST['id'] . "'";

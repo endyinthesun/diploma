@@ -1,0 +1,68 @@
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center; }
+  .wrapper .wrapper-l {
+    padding: 20px;
+    width: 65%; }
+
+summary {
+  font-size: 18px; }
+  summary::-webkit-details-marker {
+    display: none; }
+  summary::-moz-list-bullet {
+    list-style-type: none; }
+
+details {
+  position: relative;
+  margin-bottom: .5rem;
+  min-height: 1rem;
+  max-height: 3rem;
+  transition: min-height .15s linear, max-height .5s linear;
+  -webkit-transition: min-height .15s linear, max-height .15s linear;
+  overflow: hidden; }
+  details summary {
+    display: inline-block;
+    padding-left: 1.5em;
+    cursor: pointer;
+    outline: 0;
+    transition: color .12s;
+    -webkit-transition: color .12s; }
+    details summary::-webkit-details-marker {
+      display: none; }
+    details summary::-moz-list-bullet {
+      list-style-type: none; }
+    details summary span {
+      border-bottom: 1px currentColor dotted;
+      font-size: 18px; }
+    details summary:hover {
+      color: #6c94d0; }
+    details summary::before {
+      content: "";
+      left: 0;
+      top: .4em;
+      position: absolute;
+      background: url("data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjM0IiB2aWV3Qm94PSIwIDAgMjQgMjQiIHdpZHRoPSIzNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNOC41OSAxNi4zNGw0LjU4LTQuNTktNC41OC00LjU5TDEwIDUuNzVsNiA2LTYgNnoiLz48L3N2Zz4=") no-repeat 50% 50%/1em 1em;
+      width: 1em;
+      height: 1em;
+      transition: transform .1s linear;
+      -webkit-transition: transform .1s linear; }
+    details summary ~ * {
+      padding-left: 1.5em;
+      opacity: 0;
+      transition: opacity .15s linear;
+      -webkit-transition: opacity .15s linear; }
+  details[open] {
+    min-height: 2em;
+    max-height: 20em; }
+    details[open] summary {
+      color: #424242; }
+      details[open] summary ~ * {
+        opacity: 1; }
+      details[open] summary:before {
+        transform: rotate(90deg);
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg); }
+
+/*# sourceMappingURL=Rating.css.map */

@@ -1,5 +1,6 @@
 import React from 'react';
 import { isEmpty } from "lodash";
+import '../Table.scss'
 
  const AchievementsTable = (props) => {
 	const {subscriber_item_list, dropItemsFromSubscriber} = props;
@@ -8,6 +9,7 @@ import { isEmpty } from "lodash";
 		subscriber_item_list.map((item) =>{
 			return(
 				<tbody>
+				<tr>
 				<td key={'sub_item_name_' + item.id}>{item.item_name}</td>
 				<td key={'sub_item_coefficient_' + item.id}>{item.coefficient}</td>
 				<td key={'sub_item_value_' + item.id}>{item.item_value}</td>
@@ -18,19 +20,31 @@ import { isEmpty } from "lodash";
 						Видалити
 					</button>
 				</td>
+				</tr>
 				</tbody>
 			);
 		})
-	 : <tbody> Введіть свої дані </tbody>
+	 : <tbody>
+		<tr>
+		Введіть свої дані
+		</tr>
+	</tbody>
 
 
 
 	 return(
-			<table key={'subscriber_item_list'}>
+			<table key={'subscriber_item_list'}
+			       className={'table table-striped Table'}
+			>
 				<thead>
+				<tr
+					className={'Table-Header'}
+				>
 					<th key={'sub_item_name'}>Показник</th>
 					<th key={'sub_coefficient'}>Множник на одиницю</th>
 					<th key={'sub_item_value'}>Бал за одиницю</th>
+					<th key={'sub_item_value'}></th>
+				</tr>
 				</thead>
 				{rowsTable}
 			</table>
